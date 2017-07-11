@@ -32,7 +32,7 @@ mvn clean package -DskipTests
 
 HEntityDB makes use of server-side filters.  To deploy HEntityDB:
 
-* Add target/hentitydb-0.0.2.jar to the classpath of all HBase region servers.
+* Add target/hentitydb-0.0.2-deployment.jar to the classpath of all HBase region servers.
 * Restart the HBase region servers.
     
 ## Defining an Entity
