@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FindBugsFilter>
+    <Match>
+        <Package name="org.apache.hadoop.hbase.client.mock*"/>
+    </Match>
+    <Match>
+        <Package name="io.hentitydb.store.hbase.test"/>
+    </Match>
+    <Match>
+        <Class name="io.hentitydb.serialization.BufferRecycler"/>
+        <Bug code="EI2"/>
+    </Match>
+    <Match>
+        <Class name="io.hentitydb.serialization.ReadBuffer"/>
+        <Bug code="EI2"/>
+    </Match>
+    <Match>
+        <Class name="io.hentitydb.store.KeyColumn"/>
+        <Bug code="EI,EI2"/>
+    </Match>
+    <Match>
+        <Class name="io.hentitydb.store.hbase.security.AuthUtil"/>
+        <Bug code="NP"/>
+    </Match>
+
+    <!-- don't worry about ignored return value -->
+    <Match>
+        <Bug pattern="RV_RETURN_VALUE_IGNORED_BAD_PRACTICE"/>
+    </Match>
+</FindBugsFilter>

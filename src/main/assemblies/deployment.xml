@@ -1,0 +1,23 @@
+<assembly>
+    <id>deployment</id>
+    <formats>
+        <format>jar</format>
+    </formats>
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <dependencySets>
+        <dependencySet>
+            <outputDirectory>/</outputDirectory>
+            <useProjectArtifact>true</useProjectArtifact>
+            <unpack>true</unpack>
+            <scope>runtime</scope>
+            <excludes>
+                <exclude>com.google.guava:guava</exclude>
+                <exclude>org.apache.hadoop:hadoop-common</exclude>
+                <exclude>org.apache.hbase:hbase-client</exclude>
+                <exclude>org.apache.hbase:hbase-server</exclude>
+                <exclude>org.slf4j:slf4j-api</exclude>
+            </excludes>
+            <useTransitiveFiltering>true</useTransitiveFiltering>
+        </dependencySet>
+    </dependencySets>
+</assembly>
