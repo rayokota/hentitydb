@@ -38,6 +38,8 @@ public class EntityFilter<K> extends AbstractFilter<K, byte[]> {
     private transient int count = 0;
     private transient boolean done = false;
 
+    private final boolean debug = false;
+
     final static Maps.EntryTransformer<String, Column<byte[]>, ByteBuffer> COLUMN_TRANSFORMER =
             (key, value) -> value != null ? ByteBuffer.wrap(value.getBytes()) : null;
     final static Maps.EntryTransformer<String, IndexedColumn<byte[]>, ByteBuffer> INDEXED_COLUMN_TRANSFORMER =
@@ -212,19 +214,18 @@ public class EntityFilter<K> extends AbstractFilter<K, byte[]> {
                 toKeepIndexes.add(indexedColumn.getIndex());
             }
         }
-        // for debugging
-        /*
-        if (getLimit() > 0 && getCount() >= getLimit()) {
-            if (getCount() != count) {
-                StringBuilder sb = new StringBuilder();
-                sb.append("WARNING: ");
-                sb.append(getKeyString(previous));
-                sb.append(" count mismatch, initial = ").append(getCount());
-                sb.append(", final = ").append(count);
-                System.out.println(sb.toString());
+        if (debug) {
+            if (getLimit() > 0 && getCount() >= getLimit()) {
+                if (getCount() != count) {
+                    StringBuilder sb = new StringBuilder();
+                    sb.append("WARNING: ");
+                    sb.append(getKeyString(previous));
+                    sb.append(" count mismatch, initial = ").append(getCount());
+                    sb.append(", final = ").append(count);
+                    System.out.println(sb.toString());
+                }
             }
         }
-        */
         return toKeepIndexes;
     }
 
