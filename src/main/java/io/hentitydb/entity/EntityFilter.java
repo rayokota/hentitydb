@@ -38,7 +38,7 @@ public class EntityFilter<K> extends AbstractFilter<K, byte[]> {
     private transient int count = 0;
     private transient boolean done = false;
 
-    private final boolean debug = false;
+    private final static boolean debug = false;
 
     final static Maps.EntryTransformer<String, Column<byte[]>, ByteBuffer> COLUMN_TRANSFORMER =
             (key, value) -> value != null ? ByteBuffer.wrap(value.getBytes()) : null;
@@ -214,9 +214,9 @@ public class EntityFilter<K> extends AbstractFilter<K, byte[]> {
                 toKeepIndexes.add(indexedColumn.getIndex());
             }
         }
-        if (debug) {
-            if (getLimit() > 0 && getCount() >= getLimit()) {
-                if (getCount() != count) {
+        if (getLimit() > 0 && getCount() >= getLimit()) {
+            if (getCount() != count) {
+                if (debug) {
                     StringBuilder sb = new StringBuilder();
                     sb.append("WARNING: ");
                     sb.append(getKeyString(previous));
