@@ -11,7 +11,7 @@
 [javadoc-shield]: https://javadoc.io/badge/io.hentitydb/hentitydb.svg?color=blue
 [javadoc-link]: https://javadoc.io/doc/io.hentitydb/hentitydb
 
-HEntity is a client layer for using HBase as an entity database.  It supports the Entity and Sorted Collection application archetypes.
+HEntity is a client layer for using HBase as an entity database.  It supports the Entity and Sorted Collection application archetypes as described [here](https://yokota.blog/2017/07/12/hbase-application-archetypes-redux/).
 
 ## Installing
 
