@@ -201,7 +201,7 @@ In the above example, we also specify an additional field to hold the actual nam
 
 ## Setup
 
-To use HEntityDB, you must first obtain an entity context:
+To use HEntityDB, you must first obtain an entity context.  The entity context is parameterized with the type of the entity and the type of the entity ID.
 
 ```java
 Configuration config = new Configuration();
