@@ -1,5 +1,16 @@
 # HEntityDB - HBase as an Entity Database
 
+[![Build Status][travis-shield]][travis-link]
+[![Maven][maven-shield]][maven-link]
+[![Javadoc][javadoc-shield]][javadoc-link]
+
+[travis-shield]: https://travis-ci.org/rayokota/hentitydb.svg?branch=master
+[travis-link]: https://travis-ci.org/rayokota/hentitydb
+[maven-shield]: https://img.shields.io/maven-central/v/io.hentitydb/hentitydb.svg
+[maven-link]: https://search.maven.org/#search%7Cga%7C1%7Cio.hentitydb
+[javadoc-shield]: https://javadoc.io/badge/io.hentitydb/hentitydb.svg?color=blue
+[javadoc-link]: https://javadoc.io/doc/io.hentitydb/hentitydb
+
 HEntity is a client layer for using HBase as an entity database.  It supports the Entity and Sorted Collection application archetypes.
 
 ## Installing
