@@ -31,6 +31,7 @@ public final class Iterables {
      * against the predicate.  The behavior of this method is not specified if
      * {@code predicate} is dependent on {@code removeFrom}.
      *
+     * @param <T> the element type
      * @param removeFrom the iterable to (potentially) remove elements from
      * @param predicate a predicate that determines whether an element should
      *     be removed
