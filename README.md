@@ -10,7 +10,7 @@ Releases of HEntityDB are deployed to Maven Central.
 <dependency>
     <groupId>io.hentitydb</groupId>
     <artifactId>hentitydb</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.4</version>
 </dependency>
 ```
 
@@ -32,7 +32,7 @@ mvn clean package -DskipTests
 
 HEntityDB makes use of server-side filters.  To deploy HEntityDB:
 
-* Add target/hentitydb-0.0.2-deployment.jar to the classpath of all HBase region servers.
+* Add target/hentitydb-0.0.4-deployment.jar to the classpath of all HBase region servers.
 * Restart the HBase region servers.
     
 ## Defining an Entity
