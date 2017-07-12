@@ -134,6 +134,7 @@ public abstract class UpdateQuery<T, K> implements MutationQuery<T, K> {
      * Creates a raw put operation.
      *
      * @param table table
+     * @return the raw put
      */
     protected abstract Put<K, byte[]> rawPut(Table<K, byte[]> table);
 

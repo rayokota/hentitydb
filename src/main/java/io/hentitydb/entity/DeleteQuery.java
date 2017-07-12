@@ -138,6 +138,7 @@ public abstract class DeleteQuery<T, K> implements MutationQuery<T, K> {
      * Creates a raw delete operation.
      *
      * @param table table
+     * @return the raw delete
      */
     protected abstract Delete<K, byte[]> rawRemove(Table<K, byte[]> table);
 

@@ -215,7 +215,9 @@ public interface Row<K, C> {
     /**
      * Returns the column value for the given column.
      *
+     * @param <V> the value type
      * @param name the column name
+     * @param valueCodec the value codec
      * @return the column value
      */
     <V> V getValue(C name, Codec<V> valueCodec);
@@ -223,8 +225,10 @@ public interface Row<K, C> {
     /**
      * Returns the column value for the given column.
      *
+     * @param <V> the value type
      * @param family the column family
      * @param name the column name
+     * @param valueCodec the value codec
      * @return the column value
      */
     <V> V getValue(String family, C name, Codec<V> valueCodec);

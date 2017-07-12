@@ -69,8 +69,10 @@ public class TableMetadata<K, C> {
      * @param keyCodec the codec for the key
      * @param columnCodec the codec for the column names
      * @param maxColumns the default maximum number of columns for each column family
+     * @param referencingFamily another column family in the same row which references this column family
+     * @param indexingFamily another column family in the same row which indexes this column family
+     * @param indexingCodecs a list of codecs, the last of which is used for decoding the index value
      * @param ttl the default time-to-live in seconds of each column value in each column family
-     * @param options a map of options for table creation
      */
     public TableMetadata(TableName tableName,
                          String defaultFamily,
@@ -80,8 +82,7 @@ public class TableMetadata<K, C> {
                          String referencingFamily,
                          String indexingFamily,
                          List<Codec<?>> indexingCodecs,
-                         Integer ttl,
-                         Map<String, Object> options) {
+                         Integer ttl) {
         this.tableName = tableName;
         this.defaultFamily = defaultFamily;
         this.families = Lists.newArrayList();
@@ -98,13 +99,11 @@ public class TableMetadata<K, C> {
      * @param defaultFamily the default column family
      * @param keyCodec the codec for the key
      * @param columnCodec the codec for the column names
-     * @param options a map of options for table creation
      */
     public TableMetadata(TableName tableName,
                          ColumnFamilyMetadata<K, C> defaultFamily,
                          Codec<K> keyCodec,
-                         Codec<C> columnCodec,
-                         Map<String, Object> options) {
+                         Codec<C> columnCodec) {
         this.tableName = tableName;
         this.defaultFamily = defaultFamily.getName();
         this.families = Lists.newArrayList();
@@ -135,7 +134,7 @@ public class TableMetadata<K, C> {
      * Adds a column family.
      *
      * @param family the column family
-     *
+     * @return the table metadata
      */
     public TableMetadata<K, C> addColumnFamily(ColumnFamilyMetadata<K, C> family) {
         families.add(family);

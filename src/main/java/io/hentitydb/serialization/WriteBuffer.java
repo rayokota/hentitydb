@@ -161,6 +161,7 @@ public class WriteBuffer {
     /**
      * Write a string as a UTF8-encoded byte sequence.
      *
+     * @param encodeLength whether to write the length
      * @param s a string
      */
     public void writeUtf8String(String s, boolean encodeLength) {

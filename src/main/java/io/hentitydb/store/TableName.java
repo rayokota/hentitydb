@@ -25,6 +25,8 @@ public class TableName {
 
     /**
      * Returns the namespace of the table.
+     *
+     * @return the namespace
      */
     public String getNamespace() {
         return namespace;
@@ -33,6 +35,8 @@ public class TableName {
 
     /**
      * Returns the name of the table.
+     *
+     * @return the name
      */
     public String getName() {
         return name;

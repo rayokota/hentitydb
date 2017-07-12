@@ -32,7 +32,7 @@ public interface RowMutation<K, C> extends RowOperation<K, C> {
      * Executes the row mutation only if the given column equals the given value.
      *
      * @param column the column name
-     * @param compareOp
+     * @param compareOp the comparison operator
      * @param value the value to check
      * @return the operation
      */
@@ -43,7 +43,7 @@ public interface RowMutation<K, C> extends RowOperation<K, C> {
      *
      * @param family the column family
      * @param column the column name
-     * @param compareOp
+     * @param compareOp the comparison operator
      * @param value the value to check
      * @return the operation
      */
@@ -53,7 +53,7 @@ public interface RowMutation<K, C> extends RowOperation<K, C> {
      * Executes the row mutation only if the given column equals the given value.
      *
      * @param column the column name
-     * @param compareOp
+     * @param compareOp the comparison operator
      * @param value the value to check
      * @return the operation
      */
@@ -64,7 +64,7 @@ public interface RowMutation<K, C> extends RowOperation<K, C> {
      *
      * @param family the column family
      * @param column the column name
-     * @param compareOp
+     * @param compareOp the comparison operator
      * @param value the value to check
      * @return the operation
      */
@@ -74,7 +74,7 @@ public interface RowMutation<K, C> extends RowOperation<K, C> {
      * Executes the row mutation only if the given column equals the given value.
      *
      * @param column the column name
-     * @param compareOp
+     * @param compareOp the comparison operator
      * @param value the value to check
      * @return the operation
      */
@@ -85,7 +85,7 @@ public interface RowMutation<K, C> extends RowOperation<K, C> {
      *
      * @param family the column family
      * @param column the column name
-     * @param compareOp
+     * @param compareOp the comparison operator
      * @param value the value to check
      * @return the operation
      */
@@ -95,7 +95,7 @@ public interface RowMutation<K, C> extends RowOperation<K, C> {
      * Executes the row mutation only if the given column equals the given value.
      *
      * @param column the column name
-     * @param compareOp
+     * @param compareOp the comparison operator
      * @param value the value to check
      * @return the operation
      */
@@ -106,7 +106,7 @@ public interface RowMutation<K, C> extends RowOperation<K, C> {
      *
      * @param family the column family
      * @param column the column name
-     * @param compareOp
+     * @param compareOp the comparison operator
      * @param value the value to check
      * @return the operation
      */
@@ -116,7 +116,7 @@ public interface RowMutation<K, C> extends RowOperation<K, C> {
      * Executes the row mutation only if the given column equals the given value.
      *
      * @param column the column name
-     * @param compareOp
+     * @param compareOp the comparison operator
      * @param value the value to check
      * @return the operation
      */
@@ -127,7 +127,7 @@ public interface RowMutation<K, C> extends RowOperation<K, C> {
      *
      * @param family the column family
      * @param column the column name
-     * @param compareOp
+     * @param compareOp the comparison operator
      * @param value the value to check
      * @return the operation
      */
@@ -137,7 +137,7 @@ public interface RowMutation<K, C> extends RowOperation<K, C> {
      * Executes the row mutation only if the given column equals the given value.
      *
      * @param column the column name
-     * @param compareOp
+     * @param compareOp the comparison operator
      * @param value the value to check
      * @return the operation
      */
@@ -148,7 +148,7 @@ public interface RowMutation<K, C> extends RowOperation<K, C> {
      *
      * @param family the column family
      * @param column the column name
-     * @param compareOp
+     * @param compareOp the comparison operator
      * @param value the value to check
      * @return the operation
      */
@@ -158,7 +158,7 @@ public interface RowMutation<K, C> extends RowOperation<K, C> {
      * Executes the row mutation only if the given column equals the given value.
      *
      * @param column the column name
-     * @param compareOp
+     * @param compareOp the comparison operator
      * @param value the value to check
      * @return the operation
      */
@@ -169,7 +169,7 @@ public interface RowMutation<K, C> extends RowOperation<K, C> {
      *
      * @param family the column family
      * @param column the column name
-     * @param compareOp
+     * @param compareOp the comparison operator
      * @param value the value to check
      * @return the operation
      */
@@ -179,7 +179,7 @@ public interface RowMutation<K, C> extends RowOperation<K, C> {
      * Executes the row mutation only if the given column equals the given value.
      *
      * @param column the column name
-     * @param compareOp
+     * @param compareOp the comparison operator
      * @param value the value to check
      * @return the operation
      */
@@ -190,7 +190,7 @@ public interface RowMutation<K, C> extends RowOperation<K, C> {
      *
      * @param family the column family
      * @param column the column name
-     * @param compareOp
+     * @param compareOp the comparison operator
      * @param value the value to check
      * @return the operation
      */
@@ -200,7 +200,7 @@ public interface RowMutation<K, C> extends RowOperation<K, C> {
      * Executes the row mutation only if the given column equals the given value.
      *
      * @param column the column name
-     * @param compareOp
+     * @param compareOp the comparison operator
      * @param value the value to check
      * @return the operation
      */
@@ -211,7 +211,7 @@ public interface RowMutation<K, C> extends RowOperation<K, C> {
      *
      * @param family the column family
      * @param column the column name
-     * @param compareOp
+     * @param compareOp the comparison operator
      * @param value the value to check
      * @return the operation
      */
@@ -220,8 +220,9 @@ public interface RowMutation<K, C> extends RowOperation<K, C> {
     /**
      * Executes the row mutation only if the given column equals the given value.
      *
+     * @param <V> the value type
      * @param column the column name
-     * @param compareOp
+     * @param compareOp the comparison operator
      * @param value the value to check
      * @param valueCodec the value codec
      * @return the operation
@@ -231,9 +232,10 @@ public interface RowMutation<K, C> extends RowOperation<K, C> {
     /**
      * Executes the row mutation only if the given column equals the given value.
      *
+     * @param <V> the value type
      * @param family the column family
      * @param column the column name
-     * @param compareOp
+     * @param compareOp the comparison operator
      * @param value the value to check
      * @param valueCodec the value codec
      * @return the operation

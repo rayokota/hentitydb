@@ -36,7 +36,7 @@ public class HBaseTest extends ColumnStoreTest {
         inboxRefTableName = new TableName("test:inboxref");
         TableMetadata<String, Long> inboxRefTableMetadata = new TableMetadata<>(
                 inboxRefTableName, "cf",  new StringCodec(), new LongCodec(), 5, "ref", null,
-                null, null, null);
+                null, null);
         ColumnFamilyMetadata<String, Long> referencingColumnMetadata = new ColumnFamilyMetadata<>(
                 "ref", null, null);
         inboxRefTableMetadata.addColumnFamily(referencingColumnMetadata);
@@ -48,7 +48,7 @@ public class HBaseTest extends ColumnStoreTest {
         inboxIdxTableName = new TableName("test:inboxidx");
         TableMetadata<String, Long> inboxIdxTableMetadata = new TableMetadata<>(
                 inboxIdxTableName, "o",  new StringCodec(), new InvertedLongCodec(), 5, null, "i",
-                ImmutableList.of(new VersionedVarLongCodec(), new VarLongCodec()), null, null);
+                ImmutableList.of(new VersionedVarLongCodec(), new VarLongCodec()), null);
         ColumnFamilyMetadata<String, Long> indexingColumnMetadata = new ColumnFamilyMetadata<>(
                 "i", null, null);
         inboxIdxTableMetadata.addColumnFamily(indexingColumnMetadata);

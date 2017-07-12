@@ -9,16 +9,23 @@ public interface Table<K, C> extends AutoCloseable {
 
     /**
      * Returns the table metadata.
+     *
+     * @return the table metadata
      */
     TableMetadata<K, C> getMetadata();
 
     /**
      * Returns the connection.
+     *
+     * @return the connection
      */
     Connection getConnection();
 
     /**
      * Creates an executable get operation.
+     *
+     * @param key the key
+     * @return the get operation
      */
     Get<K, C> get(K key);
 
@@ -26,37 +33,55 @@ public interface Table<K, C> extends AutoCloseable {
      * Gets all rows.
      *
      * Not recommended for production use.
+     *
+     * @return the row scanner for all rows
      */
     @VisibleForTesting
     RowScanner<K, C> getAll();
 
     /**
      * Creates an executable increment operation.
+     *
+     * @param key the key
+     * @return the increment operation
      */
     Increment<K, C> increment(K key);
 
     /**
      * Creates an executable put operation.
+     *
+     * @param key the key
+     * @return the put operation
      */
     Put<K, C> put(K key);
 
     /**
      * Creates an executable delete operation.
+     *
+     * @param key the key
+     * @return the delete operation
      */
     Delete<K, C> delete(K key);
 
     /**
      * Creates an executable batch mutation.
+     *
+     * @return the batch mutation
      */
     BatchMutation<K, C> batchMutations();
 
     /**
      * Creates an executable batch operation.
+     *
+     * @return the batch operation
      */
     BatchOperation<K, C> batchOperations();
 
     /**
      * Creates an executable list of atomic mutation operations.
+     *
+     * @param key the key
+     * @return the row mutations
      */
     RowMutations<K, C> mutateRow(K key);
 
@@ -166,6 +191,9 @@ public interface Table<K, C> extends AutoCloseable {
 
     /**
      * Returns a raw representation of the filter.  For internal use only.
+     *
+     * @param filters the filters
+     * @return the raw representation of the filter
      */
     byte[] getRawFilters(List<Filter<K, C>> filters);
 }

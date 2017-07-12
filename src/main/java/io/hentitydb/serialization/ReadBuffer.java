@@ -60,6 +60,7 @@ public class ReadBuffer {
     /**
      * Reads a UTF8-encoded byte series as a string.
      *
+     * @param encodeLength whether to read the length
      * @return a string
      */
     public String readUtf8String(boolean encodeLength) {

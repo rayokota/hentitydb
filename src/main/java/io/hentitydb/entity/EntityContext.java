@@ -33,8 +33,6 @@ public interface EntityContext<T, K> {
      * Retrieves all entities.
      *
      * @return the entities
-     *
-     * @throws PersistenceException
      */
     List<T> getAll() throws PersistenceException;
 
@@ -104,8 +102,6 @@ public interface EntityContext<T, K> {
 
     /**
      * Truncate all data.
-     *
-     * @throws PersistenceException
      */
     void truncate() throws PersistenceException;
 }

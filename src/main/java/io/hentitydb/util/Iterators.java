@@ -27,6 +27,7 @@ public final class Iterators {
      * iterator. The iterator will be left exhausted: its {@code hasNext()}
      * method will return {@code false}.
      *
+     * @param <T> the element type
      * @param removeFrom the iterator to (potentially) remove elements from
      * @param predicate a predicate that determines whether an element should
      *     be removed

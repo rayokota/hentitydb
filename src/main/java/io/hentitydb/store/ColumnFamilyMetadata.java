@@ -71,6 +71,7 @@ public class ColumnFamilyMetadata<K, C> {
      *                      if the ttl has not been met, the column is not removed even if the maximum number exist
      * @param referencingFamily another column family in the same row which references this column family
      * @param indexingFamily another column family in the same row which indexes this column family
+     * @param indexingCodecs a list of codecs, the last of which is used for decoding the index value
      * @param ttl the time-to-live in seconds of each column value
      */
     public ColumnFamilyMetadata(String name,

@@ -31,6 +31,9 @@ public class HBaseTable<K, C> implements Table<K, C> {
 
     /**
      * Creates a new {@link HBaseTable}.
+     *
+     * @param conn the connection
+     * @parm metadata the table metadata
      */
     public HBaseTable(HBaseConnection conn,
                       TableMetadata<K, C> metadata) {

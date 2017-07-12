@@ -100,6 +100,7 @@ public interface Column<C> {
     /**
      * Returns the column value.
      *
+     * @param <V> the codec type
      * @param valueCodec the value codec
      * @return the column value
      */

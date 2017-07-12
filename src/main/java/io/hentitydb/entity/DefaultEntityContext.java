@@ -35,8 +35,7 @@ public class DefaultEntityContext<T, K> implements EntityContext<T, K> {
                 entityMapper.getTableName(),
                 defaultFamily,
                 MappingUtils.getCodecForField(this.entityMapper.getId(), false),
-                new ByteArrayCodec(false),
-                ImmutableMap.of());
+                new ByteArrayCodec(false));
         boolean skip = true;
         for (ColumnFamilyMetadata<K, byte[]> columnFamily : columnFamilies) {
             if (skip) {
@@ -51,7 +50,7 @@ public class DefaultEntityContext<T, K> implements EntityContext<T, K> {
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     @Override
     public Table<K, byte[]> getTable() {
@@ -59,7 +58,7 @@ public class DefaultEntityContext<T, K> implements EntityContext<T, K> {
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     @Override
     public void put(T entity) throws PersistenceException {
@@ -76,7 +75,7 @@ public class DefaultEntityContext<T, K> implements EntityContext<T, K> {
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     @Override
     public void put(Collection<T> entities) throws PersistenceException {
@@ -95,7 +94,7 @@ public class DefaultEntityContext<T, K> implements EntityContext<T, K> {
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     @Override
     public List<T> getAll() throws PersistenceException {
@@ -112,7 +111,7 @@ public class DefaultEntityContext<T, K> implements EntityContext<T, K> {
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     @Override
     public List<T> get(K id) throws PersistenceException {
@@ -125,7 +124,7 @@ public class DefaultEntityContext<T, K> implements EntityContext<T, K> {
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     @Override
     public void delete(K id) throws PersistenceException {
@@ -138,7 +137,7 @@ public class DefaultEntityContext<T, K> implements EntityContext<T, K> {
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     @Override
     public void remove(T entity) throws PersistenceException {
@@ -157,7 +156,7 @@ public class DefaultEntityContext<T, K> implements EntityContext<T, K> {
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     @Override
     public void remove(Collection<T> entities) throws PersistenceException {

@@ -16,6 +16,8 @@ public interface ConnectionFactory extends AutoCloseable {
     /**
      * Declares metadata for a table.
      *
+     * @param <K> the row key type
+     * @param <C> the column type
      * @param metadata the table metadata
      */
     <K, C> void declareTable(TableMetadata<K, C> metadata);
@@ -23,6 +25,8 @@ public interface ConnectionFactory extends AutoCloseable {
     /**
      * Returns the metadata for a table.
      *
+     * @param <K> the row key type
+     * @param <C> the column type
      * @param tableName the table name
      * @return the table metadata
      */

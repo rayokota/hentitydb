@@ -180,6 +180,7 @@ public interface Put<K, C> extends RowMutation<K, C> {
     /**
      * Specifies a column to be set.
      *
+     * @param <V> the value type
      * @param column the column name
      * @param value the value to set
      * @param valueCodec the value codec
@@ -190,6 +191,7 @@ public interface Put<K, C> extends RowMutation<K, C> {
     /**
      * Specifies a column to be set.
      *
+     * @param <V> the value type
      * @param family the column family
      * @param column the column name
      * @param value the value to set

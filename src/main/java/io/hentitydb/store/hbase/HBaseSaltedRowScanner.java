@@ -100,7 +100,7 @@ public class HBaseSaltedRowScanner<K, C> implements RowScanner<K, C> {
     }
 
     /**
-     * Gets all distributed intervals based on the original start & stop keys.
+     * Gets all distributed intervals based on the original start and stop keys.
      * Used when scanning all buckets based on start/stop row keys. Should return keys so that all buckets in which
      * records between originalStartKey and originalStopKey were distributed are "covered".
      *
