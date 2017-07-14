@@ -23,6 +23,6 @@ public class Environment {
     }
 
     public static <T, K> EntityContext<T, K> getEntityContext(Connection connection, Class<T> entityType) {
-        return new DefaultEntityContext<T, K>(connection, entityType);
+        return new DefaultEntityContext<>(connection, entityType);
     }
 }
