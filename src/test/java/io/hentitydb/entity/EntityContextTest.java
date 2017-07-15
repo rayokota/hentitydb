@@ -16,10 +16,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.persistence.*;
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OrderBy;
 import java.math.BigDecimal;
 import java.nio.ByteBuffer;
 import java.util.*;
@@ -444,6 +442,8 @@ public abstract class EntityContextTest {
         }
     }
 
+    enum TestEnum { ENUM1, ENUM2, ENUM3 }
+
     @Entity
     @javax.persistence.Table(name = "testentitytypes")
     public static class TestEntityWithTypes {
@@ -462,7 +462,9 @@ public abstract class EntityContextTest {
                                    Boolean bool,
                                    byte[] bytes,
                                    Date date,
-                                   UUID uuid) {
+                                   UUID uuid,
+                                   TestEnum e1,
+                                   TestEnum e2) {
             this.rowKey = rowKey;
             this.str = str;
             this.b = b;
@@ -476,6 +478,8 @@ public abstract class EntityContextTest {
             this.bytes = bytes;
             this.date = date;
             this.uuid = uuid;
+            this.e1 = e1;
+            this.e2 = e2;
         }
 
         @Id
@@ -504,6 +508,12 @@ public abstract class EntityContextTest {
         Date date;
         @Column
         UUID uuid;
+        @Enumerated(EnumType.ORDINAL)
+        @Column
+        TestEnum e1;
+        @Enumerated(EnumType.STRING)
+        @Column
+        TestEnum e2;
 
         @Override
         public String toString() {
@@ -520,7 +530,9 @@ public abstract class EntityContextTest {
                     + ", bool=" + bool
                     + ", bytes=" + Arrays.toString(bytes)
                     + ", date=" + date
-                    + ", uuid=" + uuid + "]";
+                    + ", uuid=" + uuid
+                    + ", e1=" + e1
+                    + ", e2=" + e2 + "]";
         }
     }
 
@@ -1413,7 +1425,9 @@ public abstract class EntityContextTest {
                 Boolean.TRUE,
                 new byte[] { 17, 18 },
                 new Date(11111111),
-                new UUID(19L, 20L)));
+                new UUID(19L, 20L),
+                TestEnum.ENUM1,
+                TestEnum.ENUM2));
 
         TestEntityWithTypes entity;
         entity = managerTypes.selectOne()
@@ -1433,6 +1447,8 @@ public abstract class EntityContextTest {
         assertThat(Arrays.equals(new byte[] { 17, 18 }, entity.bytes), is(true));
         assertEquals(new Date(11111111), entity.date);
         assertEquals(new UUID(19L, 20L), entity.uuid);
+        assertEquals(TestEnum.ENUM1, entity.e1);
+        assertEquals(TestEnum.ENUM2, entity.e2);
     }
 
     @Test

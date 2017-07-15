@@ -1,10 +1,11 @@
 package io.hentitydb.entity;
 
+import io.hentitydb.serialization.*;
 import io.hentitydb.serialization.Codec;
-import io.hentitydb.serialization.Codecs;
-import io.hentitydb.serialization.SaltingCodec;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import java.lang.reflect.Field;
 
 public class MappingUtils {
@@ -13,6 +14,7 @@ public class MappingUtils {
     static <T> Codec<T> getCodecForField(Field field, boolean isDescending) {
         Codec<T> codec;
         io.hentitydb.entity.Codec codecAnnotation = field.getAnnotation(io.hentitydb.entity.Codec.class);
+        Enumerated enumAnnotation = field.getAnnotation(Enumerated.class);
         if (codecAnnotation != null) {
             final Class<?> codecClass = codecAnnotation.value();
             if (!Codec.class.isAssignableFrom(codecClass)) {
@@ -23,6 +25,8 @@ public class MappingUtils {
             } catch (Exception e) {
                 throw new RuntimeException("Failed to invoke default ctor of " + codecClass.getName());
             }
+        } else if (enumAnnotation != null) {
+            codec = (Codec<T>) new EnumCodec(field.getType(), enumAnnotation.value());
         } else {
             codec = Codecs.getCodec(field.getType(), isDescending);
         }

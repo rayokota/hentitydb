@@ -21,7 +21,7 @@ Releases of HEntityDB are deployed to Maven Central.
 <dependency>
     <groupId>io.hentitydb</groupId>
     <artifactId>hentitydb</artifactId>
-    <version>0.0.4</version>
+    <version>0.0.5</version>
 </dependency>
 ```
 
@@ -43,7 +43,7 @@ mvn clean package -DskipTests
 
 HEntityDB makes use of server-side filters.  To deploy HEntityDB:
 
-* Add target/hentitydb-0.0.4-deployment.jar to the classpath of all HBase region servers.
+* Add target/hentitydb-0.0.5-deployment.jar to the classpath of all HBase region servers.
 * Restart the HBase region servers.
     
 ## Defining an Entity
@@ -62,14 +62,19 @@ public class User {
     
     @Column
     private String name;
+    
+    @Column
+    @Enumerated(EnumType.ORDINAL)
+    private UserType userType
 
     public User() {
     }
 
-    public User(long id, String network, String name) {
+    public User(long id, String network, String name, UserType userType) {
         this.id = id;
         this.network = network;
         this.name = name;
+        this.userType = userType;
     }
 
     public long getId() {
@@ -83,6 +88,10 @@ public class User {
     public String getNetwork() {
         return network;
     }
+    
+    public UserType getUserType() {
+        return userType;
+    }
 
     public void setNetwork(String network) {
         this.network = network;
@@ -95,6 +104,10 @@ public class User {
     public void setName(String name) {
         this.name = name;
     }
+    
+    public void setUserType(UserType userType) {
+        this.userType = userType;
+    }
 }
 ```
 
@@ -103,6 +116,7 @@ As you can see above, the `@Id` annotation indicates the field that will hold th
 For annotated fields, the following types are supported:
 
 - String
+- Byte or byte
 - Short or short
 - Integer or int
 - Long or long
@@ -113,6 +127,7 @@ For annotated fields, the following types are supported:
 - byte[]
 - Date
 - UUID
+- Enum
 
 If the field is not one of the above types, a custom codec can be specified using a `@Codec` annotation:
 
