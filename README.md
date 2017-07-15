@@ -89,10 +89,6 @@ public class User {
         return network;
     }
     
-    public UserType getUserType() {
-        return userType;
-    }
-
     public void setNetwork(String network) {
         this.network = network;
     }
@@ -105,6 +101,10 @@ public class User {
         this.name = name;
     }
     
+    public UserType getUserType() {
+        return userType;
+    }
+
     public void setUserType(UserType userType) {
         this.userType = userType;
     }
