@@ -29,6 +29,9 @@ public class Codecs {
         else if (valueClass.equals(Short.class) || valueClass.equals(short.class)) {
             serializer = new ShortCodec();
         }
+        else if (valueClass.equals(Byte.class) || valueClass.equals(byte.class)) {
+            serializer = new ByteCodec();
+        }
         else if (valueClass.equals(Float.class) || valueClass.equals(float.class)) {
             serializer = new FloatCodec();
         }

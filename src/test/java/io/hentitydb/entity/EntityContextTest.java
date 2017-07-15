@@ -8,6 +8,7 @@ import io.hentitydb.serialization.LongCodec;
 import io.hentitydb.serialization.StringCodec;
 import io.hentitydb.serialization.VarIntArrayCodec;
 import io.hentitydb.store.*;
+import org.apache.hadoop.hbase.util.Bytes;
 import org.junit.Assert;
 import org.junit.After;
 import org.junit.Before;
@@ -19,14 +20,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OrderBy;
+import java.math.BigDecimal;
 import java.nio.ByteBuffer;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 public abstract class EntityContextTest {
@@ -43,6 +42,7 @@ public abstract class EntityContextTest {
     protected static EntityContext<TestEntityWithNoColumns, String> manager4;
     protected static EntityContext<TestEntityWithColumnFamilies, String> manager5;
     protected static EntityContext<TestEntityWithTTL, String> manager6;
+    protected static EntityContext<TestEntityWithTypes, String> managerTypes;
     protected static EntityContext<PInboxEntry, String> managerInbox;
 
     @Before
@@ -120,6 +120,8 @@ public abstract class EntityContextTest {
         manager5.put(new TestEntityWithColumnFamilies("d", "D", "d", 20L, 200L, "200"));
 
         manager6 = Environment.getEntityContext(conn, TestEntityWithTTL.class);
+
+        managerTypes = Environment.getEntityContext(conn, TestEntityWithTypes.class);
 
         managerInbox = Environment.getEntityContext(conn, PInboxEntry.class);
     }
@@ -439,6 +441,86 @@ public abstract class EntityContextTest {
         @TTL
         public Integer getTTL() {
             return 2000;
+        }
+    }
+
+    @Entity
+    @javax.persistence.Table(name = "testentitytypes")
+    public static class TestEntityWithTypes {
+        public TestEntityWithTypes() {
+        }
+
+        public TestEntityWithTypes(String rowKey,
+                                   String str,
+                                   Byte b,
+                                   Short s,
+                                   Integer i,
+                                   Long l,
+                                   Float f,
+                                   Double d,
+                                   BigDecimal bd,
+                                   Boolean bool,
+                                   byte[] bytes,
+                                   Date date,
+                                   UUID uuid) {
+            this.rowKey = rowKey;
+            this.str = str;
+            this.b = b;
+            this.s = s;
+            this.i = i;
+            this.l = l;
+            this.f = f;
+            this.d = d;
+            this.bd = bd;
+            this.bool = bool;
+            this.bytes = bytes;
+            this.date = date;
+            this.uuid = uuid;
+        }
+
+        @Id
+        String rowKey;      // This will be the row key
+        @Column
+        String str;
+        @Column
+        Byte b;
+        @Column
+        Short s;
+        @Column
+        Integer i;
+        @Column
+        Long l;
+        @Column
+        Float f;
+        @Column
+        Double d;
+        @Column
+        BigDecimal bd;
+        @Column
+        Boolean bool;
+        @Column
+        byte[] bytes;
+        @Column
+        Date date;
+        @Column
+        UUID uuid;
+
+        @Override
+        public String toString() {
+            return "TestEntityWithTypes ["
+                    +   "key="   + rowKey
+                    + ", str=" + str
+                    + ", b=" + b
+                    + ", s=" + s
+                    + ", i=" + i
+                    + ", l=" + l
+                    + ", f=" + f
+                    + ", d=" + d
+                    + ", bd=" + bd
+                    + ", bool=" + bool
+                    + ", bytes=" + Arrays.toString(bytes)
+                    + ", date=" + date
+                    + ", uuid=" + uuid + "]";
         }
     }
 
@@ -1316,6 +1398,41 @@ public abstract class EntityContextTest {
                 .fetch();
         Assert.assertEquals(0, entitiesNative.size());
         LOG.info("NATIVE: " + entitiesNative);
+    }
+
+    @Test
+    public void testEntityWithTypes() throws Exception {
+        managerTypes.put(new TestEntityWithTypes("A", "s",
+                Byte.valueOf((byte)10),
+                Short.valueOf((short)11),
+                Integer.valueOf(12),
+                Long.valueOf(13L),
+                Float.valueOf(14.5f),
+                Double.valueOf(15.6d),
+                BigDecimal.valueOf(16.7d),
+                Boolean.TRUE,
+                new byte[] { 17, 18 },
+                new Date(11111111),
+                new UUID(19L, 20L)));
+
+        TestEntityWithTypes entity;
+        entity = managerTypes.selectOne()
+                .whereId().eq("A")
+                .fetchOne();
+        LOG.info("NATIVE: " + entity);
+
+        assertEquals("s", entity.str);
+        assertEquals(Byte.valueOf((byte)10), entity.b);
+        assertEquals(Short.valueOf((short)11), entity.s);
+        assertEquals(Integer.valueOf(12), entity.i);
+        assertEquals(Long.valueOf(13L), entity.l);
+        assertEquals(Float.valueOf(14.5f), entity.f);
+        assertEquals(Double.valueOf(15.6d), entity.d);
+        assertEquals(BigDecimal.valueOf(16.7d), entity.bd);
+        assertEquals(Boolean.TRUE, entity.bool);
+        assertThat(Arrays.equals(new byte[] { 17, 18 }, entity.bytes), is(true));
+        assertEquals(new Date(11111111), entity.date);
+        assertEquals(new UUID(19L, 20L), entity.uuid);
     }
 
     @Test
