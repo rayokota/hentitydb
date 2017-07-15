@@ -129,7 +129,7 @@ For annotated fields, the following types are supported:
 - UUID
 - Enum
 
-If the field is not one of the above types, a custom codec can be specified using a `@Codec` annotation:
+Enums must be marked with `@Enumerated(EnumType.ORDINAL)` or `@Enumerated(EnumType.STRING)`.  If the field is not one of the above types, a custom codec can be specified using a `@Codec` annotation:
 
 ```java
 @Entity
