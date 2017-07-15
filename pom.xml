@@ -4,7 +4,7 @@
 
     <groupId>io.hentitydb</groupId>
     <artifactId>hentitydb</artifactId>
-    <version>0.0.5-SNAPSHOT</version>
+    <version>0.0.5</version>
     <packaging>jar</packaging>
 
     <name>hentitydb</name>
@@ -28,7 +28,7 @@
         <connection>scm:git:git://github.com:rayokota/hentitydb.git</connection>
         <developerConnection>scm:git:git@github.com:rayokota/hentitydb.git</developerConnection>
         <url>git@github.com:rayokota/hentitydb.git</url>
-        <tag>hentitydb-0.0.2</tag>
+        <tag>hentitydb-0.0.5</tag>
     </scm>
 
     <properties>
