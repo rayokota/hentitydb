@@ -130,7 +130,6 @@ public class EntityFilter<K> extends AbstractFilter<K, byte[]> {
     }
 
     protected boolean filterKeyColumn(KeyColumn<K, byte[]> keyColumn, Optional<Boolean> matchesPrevious) {
-        final String methodName = "filterKeyColumn";
         ByteBuffer columnName = ByteBuffer.wrap(keyColumn.getColumn().getRawName());
         if (start.remaining() != 0 && compare(start, columnName) > 0) {
             return false;
@@ -177,7 +176,6 @@ public class EntityFilter<K> extends AbstractFilter<K, byte[]> {
 
     @Override
     public Set<Integer> filterRow(List<KeyColumn<K, byte[]>> columns) {
-        final String methodName = "filterRow";
         Set<Integer> toKeepIndexes = Sets.newHashSetWithExpectedSize(columns.size());
         // first group columns
         Map<String, IndexedColumn<byte[]>> groupedColumns = Maps.newHashMap();
