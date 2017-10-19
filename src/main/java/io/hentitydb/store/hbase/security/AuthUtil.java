@@ -24,8 +24,8 @@ public class AuthUtil {
                 // via DNS lookup when 2nd argument is empty
                 finalPrincipal = SecurityUtil.getServerPrincipal(principal, "");
             } catch (IOException e) {
-                throw new SecurityException(
-                        "Failed to resolve Kerberos principal", e);
+                LOG.error("Failed to resolve Kerberos principal: " + e.getMessage(), e);
+                throw new SecurityException("Failed to resolve Kerberos principal", e);
             }
         }
 
@@ -68,6 +68,7 @@ public class AuthUtil {
             UserGroupInformation.loginUserFromKeytab(principal, keytab);
             return UserGroupInformation.getLoginUser();
         } catch (IOException e) {
+            LOG.error("Kerberos login failed: " + e.getMessage(), e);
             throw new SecurityException("Kerberos login failed", e);
         }
     }
