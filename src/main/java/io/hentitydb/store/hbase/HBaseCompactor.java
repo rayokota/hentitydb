@@ -11,14 +11,15 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.Cell;
 import org.apache.hadoop.hbase.CellUtil;
 import org.apache.hadoop.hbase.TableName;
-import org.apache.hadoop.hbase.coprocessor.BaseRegionObserver;
 import org.apache.hadoop.hbase.coprocessor.ObserverContext;
 import org.apache.hadoop.hbase.coprocessor.RegionCoprocessorEnvironment;
+import org.apache.hadoop.hbase.coprocessor.RegionObserver;
 import org.apache.hadoop.hbase.regionserver.InternalScanner;
 import org.apache.hadoop.hbase.regionserver.NoLimitScannerContext;
 import org.apache.hadoop.hbase.regionserver.ScanType;
 import org.apache.hadoop.hbase.regionserver.ScannerContext;
 import org.apache.hadoop.hbase.regionserver.Store;
+import org.apache.hadoop.hbase.regionserver.compactions.CompactionLifeCycleTracker;
 import org.apache.hadoop.hbase.regionserver.compactions.CompactionRequest;
 
 import java.io.IOException;
@@ -27,7 +28,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class HBaseCompactor<K, C> extends BaseRegionObserver {
+public class HBaseCompactor<K, C> implements RegionObserver {
 
     private final boolean debug = false;
 
@@ -37,6 +38,7 @@ public class HBaseCompactor<K, C> extends BaseRegionObserver {
                                       final Store store,
                                       final InternalScanner scanner,
                                       final ScanType scanType,
+                                      CompactionLifeCycleTracker tracker,
                                       CompactionRequest request) throws IOException {
 
         final RegionCoprocessorEnvironment env = e.getEnvironment();
