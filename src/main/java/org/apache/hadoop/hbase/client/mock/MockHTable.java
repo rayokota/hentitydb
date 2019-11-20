@@ -889,9 +889,7 @@ public class MockHTable implements Table {
         filter.setup(props, tableName, family, "mock");
 
         ResultScanner scanner = getScanner(Bytes.toBytes(family));
-        Iterator<Result> iter = scanner.iterator();
-        while (iter.hasNext()) {
-            Result result = iter.next();
+        for (Result result : scanner) {
             boolean doDelete = false;
             Delete deleteForFilter = new Delete(result.getRow());
             for (Cell cell : result.listCells()) {

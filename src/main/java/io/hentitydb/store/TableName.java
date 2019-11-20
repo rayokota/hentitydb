@@ -1,5 +1,7 @@
 package io.hentitydb.store;
 
+import java.util.Objects;
+
 public class TableName {
 
     public static final String DEFAULT_NAMESPACE = "default";
@@ -54,8 +56,8 @@ public class TableName {
 
         TableName tableName = (TableName) o;
 
-        if (name != null ? !name.equals(tableName.name) : tableName.name != null) return false;
-        if (namespace != null ? !namespace.equals(tableName.namespace) : tableName.namespace != null) return false;
+        if (!Objects.equals(name, tableName.name)) return false;
+        if (!Objects.equals(namespace, tableName.namespace)) return false;
 
         return true;
     }

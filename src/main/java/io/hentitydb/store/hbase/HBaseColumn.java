@@ -93,9 +93,4 @@ public class HBaseColumn<C> implements Column<C> {
     public long getTimestamp() {
         return cell.getTimestamp();
     }
-
-    @Override
-    public boolean isNull() {
-        return CellUtil.cloneValue(cell) == null;
-    }
 }

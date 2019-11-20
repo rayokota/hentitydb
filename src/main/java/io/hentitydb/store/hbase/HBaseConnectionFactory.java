@@ -2,7 +2,7 @@ package io.hentitydb.store.hbase;
 
 import com.google.common.base.Throwables;
 import com.google.common.collect.Maps;
-import io.hentitydb.Configuration;
+import io.hentitydb.EntityConfiguration;
 import io.hentitydb.serialization.Codec;
 import io.hentitydb.serialization.SaltingCodec;
 import org.apache.hadoop.hbase.client.mock.MockHTable;
@@ -33,43 +33,19 @@ public class HBaseConnectionFactory implements ConnectionFactory {
     public static final String HBASE_CLIENT_JAAS_FILE          = "hbase.client.jaas.file";
     public static final String KERBEROS                        = "kerberos";
 
-    private final Configuration config;
+    private final EntityConfiguration config;
     private final Map<io.hentitydb.store.TableName, TableMetadata<?, ?>> metadata;
     private final Set<io.hentitydb.store.TableName> createdTables;
-    private final org.apache.hadoop.conf.Configuration hconfig;
     private ChoreService choreService = null;
 
-    public HBaseConnectionFactory(Configuration config) {
-        this(config, HBaseConfiguration.create());
-    }
-
-    public HBaseConnectionFactory(Configuration config,
-                                  org.apache.hadoop.conf.Configuration hbaseConfig) {
+    public HBaseConnectionFactory(EntityConfiguration config) {
         this.config = config;
         this.metadata = Maps.newConcurrentMap();
         this.createdTables = Collections.newSetFromMap(Maps.<io.hentitydb.store.TableName, Boolean>newConcurrentMap());
-
-        this.hconfig = hbaseConfig;
-        for (Map.Entry<String, String> property : getConfiguration().getProperties().entrySet()) {
-            String name = property.getKey();
-            String value = property.getValue();
-            if (name.startsWith("hadoop") ||
-                    name.startsWith("hbase") ||
-                    name.startsWith("hfile") ||
-                    name.startsWith("dfs") ||
-                    name.startsWith("zookeeper")) {
-                LOG.info("Setting property {}: {}", name, value);
-                this.hconfig.set(name, value);
-            }
-        }
-    }
-
-    protected org.apache.hadoop.conf.Configuration getHConfiguration() {
-        return hconfig;
     }
 
     @Override
-    public Configuration getConfiguration() {
+    public EntityConfiguration getConfiguration() {
         return config;
     }
 
@@ -137,7 +113,7 @@ public class HBaseConnectionFactory implements ConnectionFactory {
     private <K, C> HTableDescriptor createHTableDescriptor(TableMetadata<K, C> tableMetadata,
                                                            org.apache.hadoop.hbase.TableName tableName,
                                                            Map<String, String> props) throws IOException {
-        Configuration config = getConfiguration();
+        EntityConfiguration config = getConfiguration();
         HTableDescriptor desc = new HTableDescriptor(tableName);
         for (ColumnFamilyMetadata<K, C> family : tableMetadata.getColumnFamilies()) {
             HColumnDescriptor c = new HColumnDescriptor(family.getName());
@@ -273,7 +249,7 @@ public class HBaseConnectionFactory implements ConnectionFactory {
     }
 
     public boolean isSecure() {
-        String auth = hconfig.get(HBASE_SECURITY_AUTHENTICATION);
+        String auth = config.getHConfiguration().get(HBASE_SECURITY_AUTHENTICATION);
         return KERBEROS.equals(auth);
     }
 

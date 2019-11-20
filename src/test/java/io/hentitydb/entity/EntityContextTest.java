@@ -2,13 +2,12 @@ package io.hentitydb.entity;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
-import io.hentitydb.Configuration;
+import io.hentitydb.EntityConfiguration;
 import io.hentitydb.Environment;
 import io.hentitydb.serialization.LongCodec;
 import io.hentitydb.serialization.StringCodec;
 import io.hentitydb.serialization.VarIntArrayCodec;
 import io.hentitydb.store.*;
-import org.apache.hadoop.hbase.util.Bytes;
 import org.junit.Assert;
 import org.junit.After;
 import org.junit.Before;
@@ -29,7 +28,7 @@ import static org.junit.Assert.assertThat;
 public abstract class EntityContextTest {
     private static Logger LOG = LoggerFactory.getLogger(EntityContextTest.class);
 
-    protected static Configuration config;
+    protected static EntityConfiguration config;
     protected static ConnectionFactory factory;
     protected static Connection conn;
     protected static EntityContext<TestEntity, String> manager;

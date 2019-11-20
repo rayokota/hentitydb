@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import io.hentitydb.Configuration;
+import io.hentitydb.EntityConfiguration;
 import io.hentitydb.serialization.SaltingCodec;
 import io.hentitydb.serialization.StringCodec;
 import org.junit.*;
@@ -20,7 +20,7 @@ import static org.junit.Assert.assertThat;
 
 @SuppressWarnings("ConstantConditions")
 public abstract class ColumnStoreTest {
-    protected static Configuration config;
+    protected static EntityConfiguration config;
     protected static ConnectionFactory factory;
     protected static Connection conn;
     protected Table<String, String> table;

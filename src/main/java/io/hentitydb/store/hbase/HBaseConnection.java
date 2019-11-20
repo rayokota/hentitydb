@@ -1,11 +1,12 @@
 package io.hentitydb.store.hbase;
 
 import com.google.common.base.Throwables;
-import io.hentitydb.Configuration;
+import io.hentitydb.EntityConfiguration;
 import io.hentitydb.store.Connection;
 import io.hentitydb.store.TableMetadata;
 import io.hentitydb.store.TableName;
 import io.hentitydb.store.hbase.security.AuthUtil;
+import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.client.ConnectionFactory;
 import org.apache.hadoop.hbase.client.mock.MockHTable;
 import org.apache.hadoop.hbase.client.Table;
@@ -38,8 +39,8 @@ public class HBaseConnection implements Connection {
         try {
             this.factory = factory;
 
-            Configuration config = factory.getConfiguration();
-            final org.apache.hadoop.conf.Configuration hconfig = factory.getHConfiguration();
+            EntityConfiguration config = factory.getConfiguration();
+            final Configuration hconfig = config.getHConfiguration();
 
             UserGroupInformation ugi = null;
             if (factory.isSecure()) {

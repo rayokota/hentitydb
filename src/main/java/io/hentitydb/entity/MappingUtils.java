@@ -4,7 +4,6 @@ import io.hentitydb.serialization.*;
 import io.hentitydb.serialization.Codec;
 
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import java.lang.reflect.Field;
 

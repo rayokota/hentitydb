@@ -118,6 +118,6 @@ public class AuthUtil {
         LOG.debug("UGI: " + ugi);
         LOG.debug("Auth method: " + ugi.getAuthenticationMethod());
         LOG.debug("Keytab: " + ugi.isFromKeytab());
-        LOG.debug("Security enabled: " + ugi.isSecurityEnabled());
+        LOG.debug("Security enabled: " + UserGroupInformation.isSecurityEnabled());
     }
 }

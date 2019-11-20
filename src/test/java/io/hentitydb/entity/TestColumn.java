@@ -97,9 +97,4 @@ public class TestColumn implements Column<byte[]> {
     public long getTimestamp() {
         return timestamp;
     }
-
-    @Override
-    public boolean isNull() {
-        return value == null;
-    }
 }

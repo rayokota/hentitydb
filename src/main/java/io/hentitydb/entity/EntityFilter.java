@@ -161,10 +161,7 @@ public class EntityFilter<K> extends AbstractFilter<K, byte[]> {
         // We may get a duplicate as filterKeyColumn will be called for multiple hfiles
         // In that case keep the more recent one
         // NOTE: this assumes columns are traversed in descending timestamp order
-        Column<byte[]> old = current.get(valueName);
-        if (old == null) {
-            current.put(valueName, keyColumn.getColumn());
-        }
+        current.computeIfAbsent(valueName, k -> keyColumn.getColumn());
         previous = keyColumn;
         return filter;
     }

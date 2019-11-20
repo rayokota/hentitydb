@@ -107,9 +107,4 @@ public class TestColumn<C, V> implements Column<C> {
     public long getTimestamp() {
         return timestamp;
     }
-
-    @Override
-    public boolean isNull() {
-        return value == null;
-    }
 }

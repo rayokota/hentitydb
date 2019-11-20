@@ -65,7 +65,7 @@ public class User {
     
     @Column
     @Enumerated(EnumType.ORDINAL)
-    private UserType userType
+    private UserType userType;
 
     public User() {
     }
@@ -230,13 +230,9 @@ In the above example, we also specify an additional field to hold the actual nam
 To use HEntityDB, you must first obtain an entity context.  The entity context is parameterized with the type of the entity and the type of the entity ID.
 
 ```java
-Configuration config = new Configuration();
+Configuration hconfig = HBaseConfiguration.create();
+EntityConfiguration config = new EntityConfiguration(hconfig);
 config.setAutoTableCreation(true);
-config.setProperties(ImmutableMap.of(
-        "hbase.zookeeper.quorum", "127.0.0.1",
-        "zookeeper.znode.parent", "/hbase-unsecure"
-));
-
 ConnectionFactory factory = Environment.getConnectionFactory(config);
 Connection conn = factory.createConnection();
 EntityContext<User, Long> context = Environment.getEntityContext(conn, User.class);

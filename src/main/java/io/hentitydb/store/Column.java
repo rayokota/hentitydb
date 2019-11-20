@@ -112,11 +112,4 @@ public interface Column<C> {
      * @return the column timestamp
      */
     long getTimestamp();
-
-    /**
-     * Determines whether the column is null.
-     *
-     * @return true if the column is null; otherwise false
-     */
-    boolean isNull();
 }

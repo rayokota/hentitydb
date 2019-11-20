@@ -1,41 +1,27 @@
 package io.hentitydb;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.collect.Maps;
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.hbase.HBaseConfiguration;
 
-import javax.validation.constraints.NotNull;
-import java.util.Map;
-
-public class Configuration {
-    @NotNull
-    private Map<String, String> properties = Maps.newLinkedHashMap();
-
-    @JsonProperty
+public class EntityConfiguration {
+    private final Configuration config;
     private boolean autoTableCreation = false;
-
-    @JsonProperty
     private String namespacePrefix;
-
-    @JsonProperty
     private int regionCount = 1;
-
-    @JsonProperty
     private String jarFilePath;
-
-    @JsonProperty
     private String compression = "GZ";
-
-    @JsonProperty
     private boolean testMode = false;
 
-    @JsonProperty
-    public Map<String, String> getProperties() {
-        return properties;
+    public EntityConfiguration() {
+        this(HBaseConfiguration.create());
     }
 
-    @JsonProperty
-    public void setProperties(Map<String, String> properties) {
-        this.properties = properties;
+    public EntityConfiguration(Configuration config) {
+        this.config = config;
+    }
+
+    public Configuration getHConfiguration() {
+        return config;
     }
 
     public boolean getAutoTableCreation() {

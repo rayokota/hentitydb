@@ -79,11 +79,11 @@ public class SaltingCodec<T> extends AbstractCodec<T> {
         return bucketByte;
     }
 
-    private static int calculateHashCode(byte a[]) {
+    private static int calculateHashCode(byte[] a) {
         if (a == null) return 0;
         int result = 1;
-        for (int i = 0; i < a.length; i++) {
-            result = 31 * result + a[i];
+        for (byte b : a) {
+            result = 31 * result + b;
         }
         return result;
     }

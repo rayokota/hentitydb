@@ -3,9 +3,10 @@ package io.hentitydb.store.hbase;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import io.hentitydb.Environment;
-import io.hentitydb.Configuration;
+import io.hentitydb.EntityConfiguration;
 import io.hentitydb.serialization.*;
 import io.hentitydb.store.*;
+import org.apache.hadoop.conf.Configuration;
 import org.junit.*;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -69,17 +70,14 @@ public class HBaseTest extends ColumnStoreTest {
 
     @BeforeClass
     public static void setUpTests() throws Exception {
-        config = new Configuration();
+        Configuration hconfig = new Configuration();
+        hconfig.set("hbase.zookeeper.quorum", "127.0.0.1");
+        hconfig.set("zookeeper.znode.parent", "/hbase-unsecure");
+
+        config = new EntityConfiguration(hconfig);
         config.setAutoTableCreation(true);
         config.setNamespacePrefix("testprefix_");
         config.setTestMode(true);
-
-        ImmutableMap.Builder<String, String> builder = ImmutableMap.builder();
-        builder.put("hbase.zookeeper.quorum", "127.0.0.1");
-        builder.put("zookeeper.znode.parent", "/hbase-unsecure");
-
-        config.setProperties(builder.build());
-
         factory = Environment.getConnectionFactory(config);
         conn = factory.createConnection();
     }

@@ -8,13 +8,13 @@ import io.hentitydb.store.ConnectionFactory;
 
 public class Environment {
     @SuppressWarnings("unchecked")
-    public static ConnectionFactory getConnectionFactory(Configuration config) {
-        if (config == null) config = new Configuration();
+    public static ConnectionFactory getConnectionFactory(EntityConfiguration config) {
+        if (config == null) config = new EntityConfiguration();
 
         try {
             String clsName = "io.hentitydb.store.hbase.HBaseConnectionFactory";
             Class<? extends ConnectionFactory> cls = (Class<? extends ConnectionFactory>)Class.forName(clsName);
-            return cls.getConstructor(Configuration.class)
+            return cls.getConstructor(EntityConfiguration.class)
                     .newInstance(config);
 
         } catch (Exception e) {

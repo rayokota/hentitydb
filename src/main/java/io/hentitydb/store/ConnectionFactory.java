@@ -1,6 +1,6 @@
 package io.hentitydb.store;
 
-import io.hentitydb.Configuration;
+import io.hentitydb.EntityConfiguration;
 
 import java.util.concurrent.ExecutorService;
 
@@ -11,7 +11,7 @@ public interface ConnectionFactory extends AutoCloseable {
      *
      * @return the column store configuration
      */
-    Configuration getConfiguration();
+    EntityConfiguration getConfiguration();
 
     /**
      * Declares metadata for a table.
