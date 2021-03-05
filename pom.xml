@@ -41,7 +41,7 @@
         <hibernate-validator.version>5.2.2.Final</hibernate-validator.version>
         <jackson.version>2.10.0</jackson.version>
         <persistence-api.version>1.0.2</persistence-api.version>
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
     </properties>
 
     <dependencies>
